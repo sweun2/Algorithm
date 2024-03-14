@@ -3,7 +3,6 @@ import sys
 n=int(input())
 arr=list(map(int,input().split()))
 
-
 if(n!=1):
     result= ((n**2-3*n+2)*4 + (n-2)**2)*min(arr)
 
@@ -17,7 +16,6 @@ if(n!=1):
     result+= ((n-2)*min_two)*4+((n-1)*min_two)*4
 
     min_third=sys.maxsize
-
     for i in range(4):
         for j in range(i+1,5):
             for k in range(j+1,6):

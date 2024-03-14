@@ -1,23 +1,28 @@
-com_cnt = int(input())
-edge_cnt =int(input())
+from collections import deque
+n,m = map(int,input().split())
+visited =deque()
+for i in range(m):
+    visited.append(list(map(int,input().split())))
 
-visited = list()
-queue = list()
-graph = [list() for i in range(com_cnt+1)]
-for i in range(edge_cnt):
-    node1,node2 = map(int,input().split())
-    graph[node1].append(node2)
-    graph[node2].append(node1)
+dx = [0,0,1,-1]
+dy = [1,-1,0,0]
 
-for node in graph[1]:
-    queue.append(node)
-node = 1
-visited.append(1)
+queue = deque()
+
+for i in range(m):
+    for j in range(n):
+        if visited[i][j]==1: 
+            queue.append((i,j))
 
 while queue:
-    node = queue.pop(0)
-    if node not in visited:
-        visited.append(node)
-    for j in graph[node]:
-        if j not in visited and j not in queue:
-            queue.append(j)
+    x,y = queue.popleft()      
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        if 0<=nx<m and 0<=ny<n:
+            if visited[nx][ny] == 0 and visited[nx][ny] != -1:
+                visited[nx][ny]=visited[x][y]+1
+                queue.append((nx,ny))
+                
+print(max(map(max,visited))-1)
+    
